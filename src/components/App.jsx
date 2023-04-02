@@ -1,16 +1,38 @@
-export const App = () => {
+import React, { Component } from "react";
+import { nanoid } from "nanoid";
+import { Contacts } from "./Contacts/Contacts";
+import { Form } from "./Form/Form";
+import { Section } from "./Section/Section";
+
+export class App extends Component {
+  
+  state = {
+    contacts: [],
+  }
+
+addContact = ({name, number}) => {
+  const contact = {
+    id: nanoid(),
+    name,
+    number,
+  };
+
+  this.setState(prevState => ({
+    contacts: [contact, ...prevState.contacts],
+  }))
+};
+
+render() {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
-  );
+    <>
+    <Section title="Phonebook" />
+    <Form 
+    onSubmit={this.addContact}
+    />
+    <Section title="Contacts" />
+    <Contacts contacts={this.state.contacts}/>
+    </>
+  )
+}
+
 };
