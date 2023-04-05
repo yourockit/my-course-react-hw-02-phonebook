@@ -60,5 +60,4 @@ const filteredContacts = contacts.filter(contact =>
     </>
   )
 }
-
 };
